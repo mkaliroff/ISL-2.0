@@ -1,0 +1,117 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" href="/css/profile.css" />
+    <link rel="stylesheet" href="/css/Style.css" />
+
+
+</head>
+<style>
+    .nav_msg {
+        color: white;
+        padding-top: 4px;
+        font-size: large;
+        border: yellow;
+        padding: 6px;
+        /* box-sizing: border-box; */
+        padding-right: 20px;
+        //font-weight: bold;
+        font-style: oblique;
+    }
+</style>
+<body style="background-color:black; color:white;">
+    <nav class="navbar navbar-b navbar-trans navbar-expand-md fixed-top" id="mainNav">
+        <div class="container">
+            <div style="width:5%"></div>
+
+            @if (Session["admin"] != null && Session["admin"].Equals("Hello Admin"))
+            {
+                @Html.ActionLink("Admin Panel", "ShowAdminPanel", "Home", new { area = "" }, new { @class = "navbar-brand" })
+
+            }
+            else
+            {
+                @Html.ActionLink("ISL", "ShowHomePage", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            }
+
+
+
+            <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarDefault"
+                    aria-controls="navbarDefault" aria-expanded="false" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div style="width:2%"></div>
+
+            @if (Session["admin"] != null && Session["admin"].Equals("Hello Admin"))
+            {
+                <div class="pull-right nav_msg">@Session["Admin"]</div>
+            }
+            else
+            {
+                <div id="navmsg" class="pull-right nav_msg">@Session["user"]</div>
+            }
+            <div class="navbar-collapse collapse justify-content-end" id="navbarDefault">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll active" href="/Home/ShowHomePage">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll" href="/Home/ShowAbout">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll" href="/Home/FAQ">FAQ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll" href="/Home/ShowContact">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll" href="/Home/Login">[ Sign in</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll" href="/Home/Register">Sign up ]</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="dropdown show">
+            <a class="btn btn-info dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Menu
+            </a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="/Home/ShowHomePage">Home</a>
+                <a class="dropdown-item" href="/Home/MyProfile">Profile</a>
+                <a class="dropdown-item" href="/Home/ShowMyCollection">My Collection</a>
+                <a class="dropdown-item" href="/Home/ISLGames">ISL Games</a>
+                <a class="dropdown-item" href="/User/Logout">Logout</a>
+            </div>
+        </div>
+        <div style="width:6%"></div>
+    </nav>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - ISL ASP.NET Application</p>
+        </footer>
+    </div>
+
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+
+
+</html>
+
+
+

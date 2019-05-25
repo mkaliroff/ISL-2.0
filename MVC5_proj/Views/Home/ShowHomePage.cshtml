@@ -1,0 +1,667 @@
+﻿@model MVC5_proj.ModelView.UserViewModel
+@using MVC5_proj.Models;
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+
+
+
+
+<!-- Main Stylesheet File -->
+<link href="/css/Style.css" rel="stylesheet">
+
+
+<body>
+    <div id="home" class="intro route bg-image" style="background-image: url(/img/intro.jpg)">
+        <div class="overlay-itro"></div>
+        <div class="intro-content display-table">
+            <div class="table-cell">
+                <div class="container">
+                    <!--<p class="display-6 color-d">Hello, world!</p>-->
+                    <h1 class="intro-title mb-4">I can't hear you, but let's talk</h1>
+                    <p class="intro-subtitle"><span class="text-slider-items">ISL new communication tech,Now you can speak with them,Now you can ask them,Now you can CONNECT!</span><strong class="text-slider"></strong></p>
+                    <!-- <p class="pt-3"><a class="btn btn-primary btn js-scroll px-4" href="#about" role="button">Learn More</a></p> -->
+                    <br />
+                    <button id='us' class="btn btn-info" style="float:right">Start Speaking</button>
+                    <button id='il' class="btn btn-info " style="float:left">התחל דיבור</button>
+
+                    <div id="resultil"></div>
+                    <div id="resultus"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Modal hello-->
+    <div class="modal fade" id="hello" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img src="/img/en/hello.gif" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal goodmorning-->
+    <div class="modal fade" id="goodmorning" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img src="/img/en/goodmorning.gif" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal howareyou-->
+    <div class="modal fade" id="howareyou" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img src="/img/en/howareyou.gif" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal whatisyourname-->
+    <div class="modal fade" id="whatisyourname" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img src="/img/en/whatyourname.gif" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal illhelpyou-->
+    <div class="modal fade" id="illhelpyou" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">ISL I will help you</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img src="/img/en/illhelpyou.gif" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal i-->
+    <div class="modal fade" id="i" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">ISL</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img src="/img/en/between/i.gif" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal excited-->
+    <div class="modal fade" id="excited" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">ISL</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img src="/img/en/excited.gif" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal love-->
+    <div class="modal fade" id="love" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">ISL</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img src="/img/en/love.gif" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal music-->
+    <div class="modal fade" id="music" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">ISL</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img src="/img/en/music.gif" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal iwant-->
+    <div class="modal fade" id="iwant" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">ISL</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img src="/img/en/iwant.gif" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal coffee-->
+    <div class="modal fade" id="coffee" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">ISL</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img src="/img/en/coffe.gif" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!-- Modal my-->
+    <div class="modal fade" id="my" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img src="/img/my.png" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal name-->
+    <div class="modal fade" id="name" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img src="/img/name.png" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal fire-->
+    <div class="modal fade" id="fire" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img src="/img/en/fire.gif" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-------------------------------------------------------------עברית---------------------------------------------->
+    <!-- Modal סליחה -->
+    <div class="modal fade" id="sorryh" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img src="/img/he/sory.jpg" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+<script>
+    $(document).ready(function () {
+
+        $('#il').click(function () {
+            var r = document.getElementById("resultil");
+            if ("webkitSpeechRecognition" in window) {
+                var speechRecognizer = new webkitSpeechRecognition();
+                speechRecognizer.continuous = true;
+                speechRecognizer.interimResults = true;
+                speechRecognizer.lang = "he-IL";
+                speechRecognizer.start();
+
+                var finalTranscripts = "";
+
+                speechRecognizer.onresult = function (event) {
+
+                    var word = event.results[event.results.length - 1][0].transcript.toLowerCase().trim();
+
+                    if (word === 'סליחה') {
+                        console.log(word === 'סליחה');
+
+                        $('#sorryh').modal('show');
+                        setTimeout(function () {
+                            $("#sorryh .close").click();
+
+                        }, 2000);
+
+
+                    }
+
+                    else if (word === "my") {
+                        $('#my').modal('show');
+                        setTimeout(function () {
+                            $("#my .close").click();
+
+                        }, 2000);
+                    }
+
+                    else if (word === "name") {
+                        $('#name').modal('show');
+                        setTimeout(function () {
+                            $("#name .close").click();
+
+                        }, 2000);
+                    }
+
+                    else if (word === "is") {
+                        $('#is').modal('show');
+                        setTimeout(function () {
+                            $("#is .close").click();
+
+                        }, 2000);
+                    }
+
+                    else if (word === "daniel") {
+                        $('#daniel').modal('show');
+                        setTimeout(function () {
+                            $("#daniel .close").click();
+
+                        }, 2000);
+                    }
+
+                    else if (word === "name") {
+                        $('#name').modal('show');
+                        setTimeout(function () {
+                            $("#name .close").click();
+
+                        }, 2000);
+                    }
+                    else if (word === "name") {
+                        $('#name').modal('show');
+                        setTimeout(function () {
+                            $("#name .close").click();
+
+                        }, 2000);
+                    }
+                    else if (word === "name") {
+                        $('#name').modal('show');
+                        setTimeout(function () {
+                            $("#name .close").click();
+
+                        }, 2000);
+                    }
+                    else if (word === "name") {
+                        $('#name').modal('show');
+                        setTimeout(function () {
+                            $("#name .close").click();
+
+                        }, 2000);
+                    }
+                    var interimTranscripts = "";
+
+                    for (var i = event.resultIndex; i < event.results.length; i++) {
+
+
+                        var transcript = event.results[i][0].transcript;
+                        transcript.replace("\n", " ");
+                        if (event.results[i].isFinal) {
+                            finalTranscripts += transcript;
+                        }
+                        else {
+                            interimTranscripts += transcript;
+                        }
+                        r.innerHTML = finalTranscripts + '<span style="color: #999;">' + interimTranscripts + '</span>';
+                    }
+                };
+                speechRecognizer.onerror = function (event) {
+                };
+            }
+            else {
+                r.innerHTML = "Your browser does not support that.";
+            }
+        })
+
+
+        $('#us').click(function () {
+            var r = document.getElementById("resultus");
+            if ("webkitSpeechRecognition" in window) {
+                var speechRecognizer = new webkitSpeechRecognition();
+                speechRecognizer.continuous = true;
+                speechRecognizer.interimResults = true;
+                speechRecognizer.lang = "en-US";
+                speechRecognizer.start();
+
+                var finalTranscripts = "";
+
+                speechRecognizer.onresult = function (event) {
+
+                    var word = event.results[event.results.length - 1][0].transcript.toLowerCase().trim();
+
+                    if (word === 'hello') {
+
+                        $("#howareyou .close").click();
+                        $("#goodmorning .close").click();
+                        $("#whatisyourname .close").click();
+                        $("#illhelpyou .close").click();
+                        $("#music .close").click();
+                        $("#love .close").click();
+
+                        $('#hello').modal('show');
+                        setTimeout(function () {
+                            $("#hello .close").click();
+
+                        }, 5000);
+
+                    }
+                    if (word === 'how are you') {
+
+                        $("#goodmorning .close").click();
+                        $("#whatisyourname .close").click();
+                        $("#illhelpyou .close").click();
+                        $("#music .close").click();
+                        $("#love .close").click();
+
+                        $('#howareyou').modal('show');
+                        setTimeout(function () {
+                            $("#howareyou .close").click();
+
+                        }, 5000);
+
+
+                    }
+                    if (word === 'good morning') {
+
+                        $('#goodmorning').modal('show');
+                        setTimeout(function () {
+                            $("#goodmorning .close").click();
+
+                        }, 5000);
+
+
+                    }
+                    if (word === "what's your name") {
+
+                        $('#whatisyourname').modal('show');
+                        setTimeout(function () {
+                            $("#whatisyourname .close").click();
+
+                        }, 5000);
+
+
+                    }
+                    if (word === "i'll help you") {
+
+                        $('#illhelpyou').modal('show');
+                        setTimeout(function () {
+                            $("#illhelpyou .close").click();
+
+                        }, 5000);
+
+
+                    }
+                    if (word === "i") {
+
+                        $("#howareyou .close").click();
+                        $("#goodmorning .close").click();
+                        $("#whatisyourname .close").click();
+                        $("#illhelpyou .close").click();
+                        $("#music .close").click();
+                        $("#love .close").click();
+
+                        $('#i').modal('show');
+                        setTimeout(function () {
+                            $("#i .close").click();
+
+                        }, 5000);
+                        $("#howareyou .close").click();
+                        $("#goodmorning .close").click();
+                        $("#whatisyourname .close").click();
+                        $("#illhelpyou .close").click();
+                        $("#music .close").click();
+
+                    }
+                    if (word === "excited") {
+
+                        $('#excited').modal('show');
+                        setTimeout(function () {
+                            $("#excited .close").click();
+
+                        }, 5000);
+
+
+                    }
+                    if (word === "love") {
+
+                        $('#love').modal('show');
+                        setTimeout(function () {
+                            $("#love .close").click();
+
+                        }, 5000);
+                        $("#howareyou .close").click();
+                        $("#goodmorning .close").click();
+                        $("#whatisyourname .close").click();
+                        $("#illhelpyou .close").click();
+                        $("#i .close").click();
+                    }
+                    if (word === "music") {
+
+                        $('#music').modal('show');
+                        setTimeout(function () {
+                            $("#music .close").click();
+
+                        }, 5000);
+
+
+                    }
+                    if (word === "i want") {
+
+                        $('#iwant').modal('show');
+                        setTimeout(function () {
+                            $("#iwant .close").click();
+
+                        }, 5000);
+
+
+                    }
+                    if (word === "coffee") {
+
+                        $('#coffee').modal('show');
+                        setTimeout(function () {
+                            $("#coffee .close").click();
+
+                        }, 5000);
+
+
+                    }
+
+
+                    if (word === "first name") {
+
+                        $('#name').modal('show');
+                        setTimeout(function () {
+                            $("#name .close").click();
+
+                        }, 5000);
+                    }
+
+                    else if (word === "my") {
+                        $('#my').modal('show');
+                        setTimeout(function () {
+                            $("#my .close").click();
+
+                        }, 5000);
+                    }
+
+
+                    var interimTranscripts = "";
+
+                    for (var i = event.resultIndex; i < event.results.length; i++) {
+
+
+                        var transcript = event.results[i][0].transcript;
+                        transcript.replace("\n", " ");
+                        if (event.results[i].isFinal) {
+                            finalTranscripts += transcript;
+                        }
+                        else {
+                            interimTranscripts += transcript;
+                        }
+                        r.innerHTML = finalTranscripts + '<span style="color: #999;">' + interimTranscripts + '</span>';
+                    }
+                };
+                speechRecognizer.onerror = function (event) {
+                };
+            }
+            else {
+                r.innerHTML = "Your browser does not support that.";
+            }
+        })
+    });
+
+
+</script>
+<!-- JavaScript Libraries -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/jquery/jquery-migrate.min.js"></script>
+<script src="/lib/popper/popper.min.js"></script>
+<script src="/lib/bootstrap/js/bootstrap.min.js"></script>
+<script src="/lib/easing/easing.min.js"></script>
+<script src="/lib/counterup/jquery.waypoints.min.js"></script>
+<script src="/lib/counterup/jquery.counterup.js"></script>
+<script src="/lib/owlcarousel/owl.carousel.min.js"></script>
+<script src="/lib/lightbox/js/lightbox.min.js"></script>
+<script src="/lib/typed/typed.min.js"></script>
+
+<!-- Template Main Javascript File -->
+<script src="/js/main.js"></script>
